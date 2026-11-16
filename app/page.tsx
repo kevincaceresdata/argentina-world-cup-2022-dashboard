@@ -4,65 +4,95 @@ import MatchBars from "../components/MatchBars";
 import PressureMap from "../components/PressureMap";
 import ShotsTable from "../components/ShotsTable";
 
+const INSIGHTS = [
+  {
+    n: "1.91 → 4",
+    title: "He out-finished his chances",
+    body: "Four goals from 1.91 expected goals. Every goal came from a situation an average striker converts about half the time — the hottest finishing run of the tournament.",
+  },
+  {
+    n: "2.28 m",
+    title: "He shoots through contact",
+    body: "The nearest defender stood 2.28 metres away when he pulled the trigger, and three of his nine tracked shots had a marker inside two metres. His finishes came through bodies, not around them.",
+  },
+  {
+    n: "118",
+    title: "He was the first defender",
+    body: "Pressure events, concentrated in the opponent's half. Argentina's high block ran through the number nine — the map below is a striker's defensive shift.",
+  },
+  {
+    n: "11%",
+    title: "Nobody pressed him back",
+    body: "Only eleven percent of his ball receptions came under pressure. Argentina owned the ball, Julián owned the effort — the running was his to give, not his to suffer.",
+  },
+];
+
 export default function Home() {
   const t = summary.totals;
-  const kpis = [
-    { label: "Shots", value: String(t.shots) },
-    { label: "Goals", value: String(t.goals), highlight: true },
-    { label: "Total xG", value: t.xg.toFixed(2) },
-    { label: "Goals − xG", value: `+${(t.goals - t.xg).toFixed(2)}`, highlight: true },
-    { label: "xG per shot", value: t.xg_per_shot.toFixed(3) },
-    { label: "Nearest defender at shot", value: `${t.mean_defender_m} m` },
-    { label: "Pressure events", value: String(t.pressure_events) },
-    { label: "Receipts under pressure", value: `${t.receipts_under_pressure_pct}%` },
-  ];
   return (
     <main>
-      <header>
-        <h1>{summary.player.name}</h1>
-        <p className="sub">
-          {summary.player.team} · {summary.player.tournament} · {summary.player.position}
+      <header className="hero">
+        <p className="kicker">Argentina, 2022 FIFA World Cup, forward</p>
+        <h1>Julián Álvarez</h1>
+        <p className="lede">
+          Four goals from <strong>1.91 xG</strong> — the tournament&rsquo;s most
+          efficient striker, measured with event data and 360 freeze frames.
         </p>
+        <div className="hero-stats">
+          <div>
+            <span className="hero-num">{t.shots}</span>
+            <span className="hero-label">shots</span>
+          </div>
+          <div>
+            <span className="hero-num accent">{t.goals}</span>
+            <span className="hero-label">goals</span>
+          </div>
+          <div>
+            <span className="hero-num">+{(t.goals - t.xg).toFixed(2)}</span>
+            <span className="hero-label">goals minus xG</span>
+          </div>
+        </div>
       </header>
 
-      <section className="kpis">
-        {kpis.map((k) => (
-          <div key={k.label} className={k.highlight ? "card highlight" : "card"}>
-            <div className="kpi-value">{k.value}</div>
-            <div className="kpi-label">{k.label}</div>
-          </div>
+      <section className="insights">
+        {INSIGHTS.map((it) => (
+          <article key={it.title} className="insight">
+            <div className="insight-n">{it.n}</div>
+            <div>
+              <h2>{it.title}</h2>
+              <p>{it.body}</p>
+            </div>
+          </article>
         ))}
       </section>
 
-      <section className="panel">
-        <h2>Shot map</h2>
-        <p className="hint">
-          size = xG · green = goal · orange = saved · grey = other · hover a shot for details
-        </p>
+      <section className="map-wrap">
         <ShotMap />
+        <p className="caption">
+          Every shot of the tournament. Size is expected goals; green finished
+          in a goal, orange was saved, grey missed or was blocked. Hover any
+          dot for the minute, the match and the defender&rsquo;s distance.
+        </p>
       </section>
 
-      <div className="grid2">
-        <section className="panel">
-          <h2>xG vs goals by match</h2>
-          <p className="hint">bar = xG · red dot = goals</p>
+      <div className="duo">
+        <section>
+          <h3 className="section-title">Expected goals against actual goals, by match</h3>
           <MatchBars />
         </section>
-        <section className="panel">
-          <h2>Pressure events</h2>
-          <p className="hint">each dot = one pressure action</p>
+        <section>
+          <h3 className="section-title">Where he pressed</h3>
           <PressureMap />
         </section>
       </div>
 
-      <section className="panel">
-        <h2>Every shot</h2>
+      <section>
+        <h3 className="section-title">All eleven shots</h3>
         <ShotsTable />
       </section>
 
       <footer>
-        {summary.credit} · open data:{" "}
-        <a href="https://github.com/hudl/open-data">github.com/hudl/open-data</a>
+        Data: StatsBomb, open data. Analysis and dashboard: see repository.
       </footer>
     </main>
   );

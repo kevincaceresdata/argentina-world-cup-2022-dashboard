@@ -12,9 +12,9 @@ type Shot = {
   defender_m: number | null;
 };
 
-const GOAL = "#7CFC00";
-const SAVED = "#ff7f0e";
-const OTHER = "#9e9e9e";
+const GOAL = "#8bd450";
+const SAVED = "#ffd84d";
+const OTHER = "#5f7186";
 
 function PitchLines() {
   const line = "#5a6b60";
@@ -40,7 +40,7 @@ export default function ShotMap() {
   const shots = summary.shots as Shot[];
   return (
     <svg viewBox="0 0 120 80" className="pitch" role="img" aria-label="Shot map">
-      <rect x={0} y={0} width={120} height={80} fill="#1d2b25" />
+      <rect x={0} y={0} width={120} height={80} fill="#16352a" />
       <PitchLines />
       {shots.map((s, i) => (
         <circle
