@@ -1,9 +1,11 @@
 import data from "../data/argentina.json";
+import { STR, type Lang } from "../app/i18n";
 
 const GRASS = "#8bd450";
 const SKY = "#8fc1f5";
 
-export default function PlayersChart() {
+export default function PlayersChart({ lang }: { lang: Lang }) {
+  const t = STR[lang];
   const top = data.players.slice(0, 8);
   const W = 760;
   const rowH = 40;
@@ -14,8 +16,8 @@ export default function PlayersChart() {
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="players" role="img" aria-label="Goals and xG by player">
-      <text x={nameW} y={13} className="runhead" fill={GRASS}>goals</text>
-      <text x={nameW + 14} y={13} className="runhead" fill={SKY}>expected</text>
+      <text x={nameW} y={13} className="runhead" fill={GRASS}>{t.goals}</text>
+      <text x={nameW + 14} y={13} className="runhead" fill={SKY}>{t.expected}</text>
       {top.map((p, i) => {
         const y = 22 + i * rowH;
         const wg = (p.goals / max) * barW;
@@ -33,7 +35,7 @@ export default function PlayersChart() {
               <title>{`${p.xg.toFixed(2)} xG`}</title>
             </rect>
             <text x={nameW + Math.max(wg, wx) + 10} y={y + 16} className="runassist">
-              {p.assists > 0 ? `${p.assists} shot assists` : ""}
+              {p.assists > 0 ? `${p.assists} ${t.shotAssists}` : ""}
             </text>
           </g>
         );

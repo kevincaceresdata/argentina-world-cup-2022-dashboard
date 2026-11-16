@@ -1,9 +1,11 @@
 import data from "../data/argentina.json";
+import { STR, type Lang } from "../app/i18n";
 
 const AMBER = "#ffd84d";
 const RED = "#e5484d";
 
-export default function DibuChart() {
+export default function DibuChart({ lang }: { lang: Lang }) {
+  const t = STR[lang];
   const max = Math.max(...data.dibu.map((d) => Math.max(d.xg_faced, d.goals_conceded)), 1);
   const W = 700;
   const rowH = 46;
@@ -13,7 +15,7 @@ export default function DibuChart() {
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="dibu" role="img" aria-label="Goals conceded vs expected, by match">
-      <text x={labelW} y={13} className="runhead" fill={AMBER}>xG faced</text>
+      <text x={labelW} y={13} className="runhead" fill={AMBER}>{t.xgFaced}</text>
       {data.dibu.map((d, i) => {
         const y = 22 + i * rowH;
         const w = (d.xg_faced / max) * barW;

@@ -111,6 +111,25 @@ h1, .insight-n, .hero-num {
 .barstage { fill: var(--mute); font-size: 10px; }
 .barval { fill: var(--ink); font-size: 12px; font-weight: 600; }
 
+.langnav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  align-items: baseline;
+  margin-bottom: 28px;
+  font-size: 13px;
+}
+.langnav button {
+  background: none;
+  border: none;
+  color: var(--mute);
+  font: inherit;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.langnav button.on { color: var(--sky); font-weight: 700; }
+.langnav .sep { color: var(--hairline); }
+
 section { margin-bottom: 56px; }
 .julian { border-top: 1px solid var(--hairline); padding-top: 40px; }
 .julian .duo { margin-bottom: 40px; }

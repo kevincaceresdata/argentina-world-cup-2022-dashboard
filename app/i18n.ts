@@ -1,0 +1,72 @@
+export type Lang = "en" | "es";
+
+export const STR = {
+  en: {
+    kicker: "2022 FIFA World Cup, champions",
+    lede: "Fifteen goals, eight conceded, and a title built on a wall that allowed 0.61 expected goals per match. The full tournament, measured with event data and 360 freeze frames.",
+    stats: ["goals scored", "goals conceded", "expected goals for", "expected goals against"],
+    insights: [
+      { n: "2.49–0.15", title: "The defeat that made no sense", body: "Saudi Arabia: 2.49 expected goals against 0.15 — the most one-sided match Argentina played — and the only loss. The two shots that beat them carried 0.15 xG combined. The data says they dominated; the scoreboard disagreed." },
+      { n: "16", title: "Messi created everything", body: "Seven goals, and sixteen passes that ended in a shot for a teammate. No other player reached ten. Every attacking sequence of the tournament ran through him, one way or another." },
+      { n: "2.12 → 0", title: "The striker lottery", body: "Lautaro Martínez generated 2.12 expected goals and scored none. Julián Álvarez generated 1.91 and scored four. Same position, same team, opposite tournaments — finishing is a skill, and also a coin flip." },
+      { n: "0.61", title: "The wall", body: "Expected goals conceded per match: 0.61, four point two four across the whole tournament. Opponents needed miracles — two low-xG strikes from Saudi Arabia, two from Weghorst — or Kylian Mbappé." },
+      { n: "980", title: "Pressing was the system", body: "Nine hundred and eighty pressure events, led by a striker (Álvarez, 118) and a holding midfielder (Enzo Fernández, 107). Argentina defended from the front with the number nine, and attacked from the back with the number five." },
+    ],
+    roadTitle: "The road to the title, match by match",
+    playersTitle: "Who scored, who should have",
+    goals: "goals",
+    expected: "expected",
+    shotAssists: "shot assists",
+    xgFor: "xG for",
+    xgAgainst: "xG against",
+    dibuTitle: "The goal that was never expected",
+    dibuCaption: "What the goalkeeper faced. Gold bars are the expected goals of the shots he saw; red dots are the ones that went in.",
+    xgFaced: "xG faced",
+    julianTitle: "The number nine: Julián Álvarez",
+    julianInsights: [
+      { n: "1.91 → 4", title: "He out-finished his chances", body: "Four goals from 1.91 expected goals — the hottest finishing run of the tournament, worth +2.09 over average." },
+      { n: "2.28 m", title: "He shoots through contact", body: "The nearest defender stood 2.28 metres away when he pulled the trigger. His goals came through bodies, not around them." },
+    ],
+    mapCaption: "Every shot of his tournament. Size is expected goals; green finished in a goal. Hover any dot for the match, minute and the defender’s distance.",
+    pressureCaption: "His 118 pressure events — the most of any Argentina player, from the striker position.",
+    footer: "Data: StatsBomb, open data. Analysis and dashboard: see repository.",
+  },
+  es: {
+    kicker: "Copa Mundial 2022, campeones",
+    lede: "Quince goles, ocho concedidos, y un título construido sobre un muro que permitió 0.61 goles esperados por partido. El torneo completo, medido con datos de evento y cuadros 360.",
+    stats: ["goles anotados", "goles concedidos", "goles esperados a favor", "goles esperados en contra"],
+    insights: [
+      { n: "2.49–0.15", title: "La derrota que no tenía sentido", body: "Arabia Saudita: 2.49 goles esperados contra 0.15 — el partido más dominado de todo el torneo — y la única derrota. Los dos remates que los vencieron sumaban 0.15 xG. Los datos dicen que dominaron; el marcador, que no." },
+      { n: "16", title: "Messi lo creó todo", body: "Siete goles y dieciséis pases que terminaron en remate de un compañero. Nadie más llegó a diez. Cada ataque del torneo pasó por él, de una forma u otra." },
+      { n: "2.12 → 0", title: "La lotería del nueve", body: "Lautaro Martínez generó 2.12 goles esperados y no convirtió ninguno. Julián Álvarez generó 1.91 e hizo cuatro. Misma posición, mismo equipo, torneos opuestos: definir es una habilidad, y también una moneda al aire." },
+      { n: "0.61", title: "El muro", body: "Goles esperados concedidos por partido: 0.61, cuatro con veinticuatro en todo el torneo. Los rivales necesitaron milagros —dos remates de baja probabilidad de Arabia Saudita, dos de Weghorst— o Kylian Mbappé." },
+      { n: "980", title: "Presionar era el sistema", body: "Novecientas ochenta presiones, lideradas por un delantero (Álvarez, 118) y un volante central (Enzo Fernández, 107). Argentina defendía desde arriba con el nueve y atacaba desde atrás con el cinco." },
+    ],
+    roadTitle: "El camino al título, partido a partido",
+    playersTitle: "Quién marcó y quién debió hacerlo",
+    goals: "goles",
+    expected: "esperados",
+    shotAssists: "asistencias de remate",
+    xgFor: "xG a favor",
+    xgAgainst: "xG en contra",
+    dibuTitle: "El arco que casi no existió",
+    dibuCaption: "Lo que enfrentó el arquero. Las barras doradas son los goles esperados de los remates que atajó; los puntos rojos, los que entraron.",
+    xgFaced: "xG enfrentados",
+    julianTitle: "El nueve: Julián Álvarez",
+    julianInsights: [
+      { n: "1.91 → 4", title: "Definió más de lo que creó", body: "Cuatro goles de 1.91 esperados: la racha de definición más caliente del torneo, +2.09 sobre el promedio." },
+      { n: "2.28 m", title: "Remata con la marca encima", body: "El defensor más cercano estaba a 2.28 metros cuando remataba. Sus goles salieron a través de los cuerpos, no lejos de ellos." },
+    ],
+    mapCaption: "Cada remate de su torneo. El tamaño es el gol esperado; el verde terminó en gol. Pasá el mouse sobre cualquier punto para ver el partido, el minuto y la distancia del defensor.",
+    pressureCaption: "Sus 118 presiones — la mayor cifra de cualquier jugador de Argentina, desde la posición de delantero.",
+    footer: "Datos: StatsBomb, datos abiertos. Análisis y dashboard: ver repositorio.",
+  },
+} as const;
+
+export const STAGE_ES: Record<string, string> = {
+  Group: "Fase de grupos",
+  R16: "Octavos",
+  QF: "Cuartos",
+  SF: "Semifinal",
+  Final: "Final",
+};

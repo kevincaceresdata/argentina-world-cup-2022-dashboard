@@ -1,88 +1,50 @@
+"use client";
+
+import { useState } from "react";
 import arg from "../data/argentina.json";
-import julian from "../data/summary.json";
 import ShotMap from "../components/ShotMap";
-import MatchBars from "../components/MatchBars";
-import PressureMap from "../components/PressureMap";
 import ShotsTable from "../components/ShotsTable";
+import PressureMap from "../components/PressureMap";
 import TournamentRun from "../components/TournamentRun";
 import PlayersChart from "../components/PlayersChart";
 import DibuChart from "../components/DibuChart";
-
-const TEAM_INSIGHTS = [
-  {
-    n: "2.49–0.15",
-    title: "The defeat that made no sense",
-    body: "Saudi Arabia: 2.49 expected goals against 0.15 — the most one-sided match Argentina played — and the only loss. The two shots that beat them carried 0.15 xG combined. The data says they dominated; the scoreboard disagreed.",
-  },
-  {
-    n: "16",
-    title: "Messi created everything",
-    body: "Seven goals, and sixteen passes that ended in a shot for a teammate. No other player reached ten. Every attacking sequence of the tournament ran through him, one way or another.",
-  },
-  {
-    n: "2.12 → 0",
-    title: "The striker lottery",
-    body: "Lautaro Martínez generated 2.12 expected goals and scored none. Julián Álvarez generated 1.91 and scored four. Same position, same team, opposite tournaments — finishing is a skill, and also a coin flip.",
-  },
-  {
-    n: "0.61",
-    title: "The wall",
-    body: "Expected goals conceded per match: 0.61, four point two four across the whole tournament. Opponents needed miracles — two low-xG strikes from Saudi Arabia, two from Weghorst — or Kylian Mbappé.",
-  },
-  {
-    n: "980",
-    title: "Pressing was the system",
-    body: "Nine hundred and eighty pressure events, led by a striker (Álvarez, 118) and a holding midfielder (Enzo Fernández, 107). Argentina defended from the front with the number nine, and attacked from the back with the number five.",
-  },
-];
-
-const JULIAN_INSIGHTS = [
-  {
-    n: "1.91 → 4",
-    title: "He out-finished his chances",
-    body: "Four goals from 1.91 expected goals — the hottest finishing run of the tournament, worth +2.09 over average.",
-  },
-  {
-    n: "2.28 m",
-    title: "He shoots through contact",
-    body: "The nearest defender stood 2.28 metres away when he pulled the trigger. His goals came through bodies, not around them.",
-  },
-];
+import { STR, type Lang } from "./i18n";
 
 export default function Home() {
-  const t = arg.totals;
+  const [lang, setLang] = useState<Lang>("en");
+  const t = STR[lang];
+  const tot = arg.totals;
+  const hero = [
+    { v: String(tot.goals_for), l: t.stats[0] },
+    { v: String(tot.goals_against), l: t.stats[1] },
+    { v: tot.xg_for.toFixed(1), l: t.stats[2] },
+    { v: tot.xg_against.toFixed(2), l: t.stats[3], accent: true },
+  ];
+
   return (
     <main>
+      <nav className="langnav">
+        <button onClick={() => setLang("en")} className={lang === "en" ? "on" : ""}>EN</button>
+        <span className="sep">/</span>
+        <button onClick={() => setLang("es")} className={lang === "es" ? "on" : ""}>ES</button>
+      </nav>
+
       <header className="hero">
-        <p className="kicker">2022 FIFA World Cup, champions</p>
+        <p className="kicker">{t.kicker}</p>
         <h1>Argentina</h1>
-        <p className="lede">
-          Fifteen goals, eight conceded, and a title built on a wall that allowed
-          0.61 expected goals per match. The full tournament, measured with event
-          data and 360 freeze frames.
-        </p>
+        <p className="lede">{t.lede}</p>
         <div className="hero-stats">
-          <div>
-            <span className="hero-num">{t.goals_for}</span>
-            <span className="hero-label">goals scored</span>
-          </div>
-          <div>
-            <span className="hero-num">{t.goals_against}</span>
-            <span className="hero-label">goals conceded</span>
-          </div>
-          <div>
-            <span className="hero-num">{t.xg_for.toFixed(1)}</span>
-            <span className="hero-label">expected goals for</span>
-          </div>
-          <div>
-            <span className="hero-num accent">{t.xg_against.toFixed(2)}</span>
-            <span className="hero-label">expected goals against</span>
-          </div>
+          {hero.map((h) => (
+            <div key={h.l}>
+              <span className={h.accent ? "hero-num accent" : "hero-num"}>{h.v}</span>
+              <span className="hero-label">{h.l}</span>
+            </div>
+          ))}
         </div>
       </header>
 
       <section className="insights">
-        {TEAM_INSIGHTS.map((it) => (
+        {t.insights.map((it) => (
           <article key={it.title} className="insight">
             <div className="insight-n">{it.n}</div>
             <div>
@@ -94,29 +56,26 @@ export default function Home() {
       </section>
 
       <section>
-        <h3 className="section-title">The road to the title, match by match</h3>
-        <TournamentRun />
+        <h3 className="section-title">{t.roadTitle}</h3>
+        <TournamentRun lang={lang} />
       </section>
 
       <div className="duo">
         <section>
-          <h3 className="section-title">Who scored, who should have</h3>
-          <PlayersChart />
+          <h3 className="section-title">{t.playersTitle}</h3>
+          <PlayersChart lang={lang} />
         </section>
         <section>
-          <h3 className="section-title">The goal that was never expected</h3>
-          <DibuChart />
-          <p className="caption">
-            What the goalkeeper faced. Gold bars are the expected goals of the
-            shots he saw; red dots are the ones that went in.
-          </p>
+          <h3 className="section-title">{t.dibuTitle}</h3>
+          <DibuChart lang={lang} />
+          <p className="caption">{t.dibuCaption}</p>
         </section>
       </div>
 
       <section className="julian">
-        <h3 className="section-title">The number nine: Julián Álvarez</h3>
+        <h3 className="section-title">{t.julianTitle}</h3>
         <div className="julian-grid">
-          {JULIAN_INSIGHTS.map((it) => (
+          {t.julianInsights.map((it) => (
             <article key={it.title} className="insight">
               <div className="insight-n">{it.n}</div>
               <div>
@@ -129,26 +88,17 @@ export default function Home() {
         <div className="duo">
           <div className="map-wrap slim">
             <ShotMap />
-            <p className="caption">
-              Every shot of his tournament. Size is expected goals; green
-              finished in a goal. Hover any dot for the match, minute and the
-              defender&rsquo;s distance.
-            </p>
+            <p className="caption">{t.mapCaption}</p>
           </div>
           <div>
             <PressureMap />
-            <p className="caption">
-              His 118 pressure events — the most of any Argentina player,
-              from the striker position.
-            </p>
+            <p className="caption">{t.pressureCaption}</p>
           </div>
         </div>
         <ShotsTable />
       </section>
 
-      <footer>
-        Data: StatsBomb, open data. Analysis and dashboard: see repository.
-      </footer>
+      <footer>{t.footer}</footer>
     </main>
   );
 }

@@ -6,9 +6,9 @@ const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-displ
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
-  title: "Julián Álvarez — 2022 World Cup profile",
+  title: "Argentina — 2022 World Cup, data profile",
   description:
-    "Player profile built on StatsBomb open data: event data plus 360 freeze frames.",
+    "Argentina's 2022 World Cup run measured with StatsBomb open data: event data plus 360 freeze frames. Bilingual EN/ES.",
 };
 
 export default function RootLayout({
