@@ -1,0 +1,4 @@
+:HL["/argentina-world-cup-2022-dashboard/_next/static/chunks/0pd65xy4xiy7j.css","style"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
+0:{"b":"YtyQsXBy6NOthxccXvxcW","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
