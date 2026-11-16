@@ -97,10 +97,25 @@ h1, .insight-n, .hero-num {
 }
 
 /* svg charts */
-.pitch, .bars { width: 100%; height: auto; display: block; }
+.pitch, .bars, .run, .players, .dibu { width: 100%; height: auto; display: block; }
+.runlabel { fill: var(--ink); font-size: 13.5px; }
+.runstage { fill: var(--mute); font-size: 10px; }
+.runxg { fill: var(--mute); font-size: 11px; }
+.runhead { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+.runscore { font-size: 13px; font-weight: 700; }
+.runscore.won { fill: var(--grass); }
+.runscore.draw { fill: var(--mute); }
+.runscore.lost { fill: #e5484d; }
+.runassist { fill: var(--mute); font-size: 10.5px; }
 .barlabel { fill: var(--ink); font-size: 13px; }
 .barstage { fill: var(--mute); font-size: 10px; }
 .barval { fill: var(--ink); font-size: 12px; font-weight: 600; }
+
+section { margin-bottom: 56px; }
+.julian { border-top: 1px solid var(--hairline); padding-top: 40px; }
+.julian .duo { margin-bottom: 40px; }
+.julian .julian-grid { margin-bottom: 36px; }
+.map-wrap.slim { margin-bottom: 0; }
 
 /* table */
 table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
